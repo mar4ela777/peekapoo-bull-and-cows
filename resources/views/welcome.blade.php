@@ -48,6 +48,14 @@
                             This is the Peecapoo Game Bull and Cows
                         </h1>
                     </div>
+                    {{ Form::open(['url' => '#']) }} 
+                        <div>
+                            {{ Form::text('number', null, array('placeholder'=>'Your Number'), Input::old('number')) }}
+                        </div>
+                        <div class="login_btn">
+                            {{ Form::submit('')}}
+                        </div>                
+                    {{ Form::close()}} 
 		</div>
 	</body>
 </html>
