@@ -43,6 +43,11 @@
 				<div class="title">Laravel 5</div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 			</div>
+                    <div>
+                        <h1>
+                            This is the Peecapoo Game Bull and Cows
+                        </h1>
+                    </div>
 		</div>
 	</body>
 </html>
