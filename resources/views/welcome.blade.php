@@ -39,23 +39,33 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="content">
-				<div class="title">Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
-			</div>
+			{{--<div class="content">--}}
+				{{--<div class="title">Laravel 5</div>
+				<div class="quote">{{ Inspiring::quote() }} {{--</div>
+			</div>--}}
                     <div>
                         <h1>
                             This is the Peecapoo Game Bull and Cows
                         </h1>
                     </div>
-                    {{ Form::open(['url' => '#']) }} 
+                    
                         <div>
-                            {{ Form::text('number', null, array('placeholder'=>'Your Number'), Input::old('number')) }}
+                            {!! Form::open([]) !!} 
+                                {!! Form::text('number', null, array('placeholder'=>'Моля, въведете вашето число'), Input::old('number')) !!}
+                                {!! Form::submit('Опитай') !!}
+                            {!! Form::close() !!} 
                         </div>
-                        <div class="login_btn">
-                            {{ Form::submit('')}}
+                    <br />
+                        <div>
+                            <h2>
+                                Вашите предположения:
+                            </h2>
                         </div>                
-                    {{ Form::close()}} 
+                        <div>
+                            <h2>
+                                Вашия Резултат:
+                            </h2>
+                        </div>      
 		</div>
 	</body>
 </html>
