@@ -6231,3 +6231,7 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+.image-backgraund{
+    background: url('/images/home.png') no-repeat;
+    height: 600px;
+}

@@ -1,3 +1,39 @@
+@extends('app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">This is the Peecapoo Game Bull and Cows</div>
+
+                <div class="panel-body image-backgraund">
+                    <div>
+                        <h1>
+                            Изберете Игра
+                        </h1>
+                    </div>
+                    <ul>
+                        <li>
+                            <h2>
+                            <a class="btn btn-link" href="{{ url('/multiplayer') }}">Multiplayer</a>
+                            </h2>
+                        </li>
+                        <li>
+                            <h2>
+                             <a class="btn btn-link" href="{{ url('/singleplayer') }}">Singleplayer</a>
+                            </h2>
+                        </li>
+                    </ul>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+<!--
 <html>
 	<head>
 		<title>Laravel</title>
@@ -68,4 +104,4 @@
                         </div>      
 		</div>
 	</body>
-</html>
+</html>-->

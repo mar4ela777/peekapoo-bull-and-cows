@@ -12,11 +12,15 @@ class GameController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function multiplayerIndex()
 	{
-		//
+            return view('multiplayer');
 	}
-
+        
+        public function singleplayerIndex()
+	{
+            return view('singleplayer');
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *
