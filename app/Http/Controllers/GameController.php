@@ -50,7 +50,7 @@ class GameController extends Controller {
             
             //echo $number;
             echo "<br/>";
-            //print_r($array_guess);
+            print_r($array_guess);
             
             echo '<br/>';
            // print_r($array_number);
