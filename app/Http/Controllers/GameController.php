@@ -64,7 +64,7 @@ class GameController extends Controller {
                 echo '<br/>';
             }
             echo "cows: $cow bulls: $bull";
-
+//            //echo $number;
             echo "<br/>";
             print_r($array_guess);
             
