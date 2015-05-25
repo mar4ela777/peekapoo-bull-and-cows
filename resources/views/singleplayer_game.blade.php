@@ -25,7 +25,7 @@
                     @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/singleplayer') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="game_id" value="{{ $game_id }}">
+                        <input type="hidden" name="game_id" value="{{ $game->id }}">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Вашето предположение:</label>
@@ -39,11 +39,27 @@
                                 <button type="submit" class="btn btn-primary">Опитай</button>
                             </div>
                         </div>
-                    </form>                    
+                    </form>
+                    <div>
+                        <table>
+                            <thead>
+                                <th>Вашето предположение</th>
+                                <th>Бикове и крави</th>
+                            </thead>
+                            <tbody>
+                                @foreach($game->guessNumber as $key => $value)
+                                <tr>
+                                    <td>{{$value->guess_number}}</td>
+                                    <td>Бикове: {{$value->bulls}} Крави: {{$value->cows}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
 
 @stop

@@ -22,6 +22,7 @@ Route::controllers([
 Route::get('/multiplayer', 'GameController@multiplayerIndex');
 Route::post('/multiplayer', 'GameController@multiplayerPost');
 
-Route::get('/singleplayer', 'GameController@singleplayerIndex');
-
+Route::get('/singleplayer', 'GameController@newSingleplayer');
 Route::post('/singleplayer', 'GameController@singleplayerPost');
+
+//Route::get('/win', 'GameController@newSingleplayer');

@@ -6,9 +6,35 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Input; // add this to work Input::all()
-class GameController extends Controller {
 
-	/**
+use App\Game;
+use App\GuessNumber;
+class GameController extends Controller {
+    
+    
+        /*
+         * Create new singleplayer game
+         */
+        public function newSingleplayer() {
+            // create array 1 to 9
+            $range_array = range(1, 9);
+           
+            // flip array
+            $array_flip = array_flip($range_array);
+
+            // create our secret number
+            $secret_number = implode(array_rand($array_flip, 4));
+            
+            //save secret number in 
+            $game = New Game;
+            $game->secret_number = $secret_number;
+            $game->save();
+            $game_id = $game->id;
+            
+            return view('singleplayer')->with('game_id', $game_id);
+        }
+
+        /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -24,152 +50,36 @@ class GameController extends Controller {
 	}
         
         public function singleplayerPost()
-	{
-            $number = 1234;
-            //$guess = $_POST['first_player']; change it, becouse this is best practis
-            $guess = Input::get('first_player'); 
-           
+	{            
+            $game_id = Input::get('game_id');
+            $guess_number = Input::get('first_player'); 
+            $game = Game::find($game_id); 
+            $secret_number = $game->secret_number;
             
-            $array_number = array_map('intval', str_split($number));
-            $array_guess  = str_split($guess);
+            $array_number = array_map('intval', str_split($secret_number));
+            $array_guess  = str_split($guess_number);
             $bull = 0;
             $cow = 0;
-////            foreach ($array_guess as $value_guess) {
-////                //echo $value_guess . '<br/>';
-////                foreach ($array_number as $value_number) {
-////
-////                    //echo $value_number . '<br/>';
-////                    if($value_guess == $value_number){
-////                        $bull++;
-////                        echo 'yes '.$value_number .' - '. $value_guess.' - '.$bull . '<br/>';
-////                    } else {
-////                        echo 'no '. $value_number .' - '. $value_guess.' - ' . $bull .'<br/>';
-////                    }
-////                }
-////                echo '<br/>';
-////            }
-////            
-////            echo '<br/>';
+            
+            
             foreach($array_number as $key_number => $value_number){                
-                foreach ($array_guess as $key_guess => $value_guess){
-                    echo "our number: $value_number - your number: $value_guess </br>";
-                    if($value_guess == $value_number && $key_guess == $key_number){
-                        $bull++;
-                        echo "bull: $bull - $value_guess - $value_number </br>";
-                    } else if($value_guess == $value_number && $key_guess != $key_number){
-                        $cow++;
-                        echo "cow: $cow - $value_guess - $value_number </br>";
+                foreach ($array_guess as $key_guess => $value_guess){                    
+                    if(($value_guess == $value_number) && ($key_guess == $key_number)){
+                        $bull++;                        
+                    } else if(($value_guess == $value_number) && ($key_guess != $key_number)){
+                        $cow++;                       
                     }
                 }
-                echo '<br/>';
             }
-            echo "cows: $cow bulls: $bull";
-//            //echo $number;
-            echo "<br/>";
-            print_r($array_guess);
-            
-            echo '<br/>';
-            print_r($array_number);
-            
-            $test = range(1, 9);
-            $test_rand = rand(1, 9);
-            $secret_number = array();
-           $secret= 0;
-//            for($i = 0; $i = 4; $i++ ){
-//                $secret_number[$i]=rand(1,9);
-//                $secret=$secret.$secret_number[$i];
-//            }
-//           // print_r($secret_number);
-//            print_r($secret);
-            
-            $test_flip = array_flip($test);
-            
-            $test_array_rand = array_rand($test_flip, 4);
-            
-            echo '<br/>RANGE';
-            print_r($test);
-            echo '<br/>rand';
-            print_r($test_rand);
-            echo '<br/> ARRAY_FLIP';
-            print_r($test_flip);
-            echo '<br/>';
-            print_r($test_array_rand);
-            echo '<br/>';
-            
-//            if($number == $guess){
-//                echo "<br/>";
-//                echo '4 bulls';
-//            } else{
-//                
-//                echo "<br/>";
-//                echo 'sorry';
-//            }
-            
-            //print_r($all);
-            //return view('singleplayer');
+                        
+            $guess = New GuessNumber;  
+            $guess->saveGuess($game_id, $guess_number, $bull, $cow);      
+            if($bull == 4){
+                return view('win_game')->with('game', $game);
+            } else{
+                return view('singleplayer_game')->with('game', $game);
+            }
 	}
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+	
 
 }
