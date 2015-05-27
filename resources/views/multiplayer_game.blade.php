@@ -25,12 +25,12 @@
                     @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/singleplayer') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="game_id" value="{{ $game_id }}">
+                        <input type="hidden" name="game_id" value="{{ $game->id }}">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Вашето предположение:</label>
                             <div class="col-md-6">
-                                <input type="first_player" class="form-control" name="first_player" autofocus="on" value="{{ old('first_player') }}">
+                                <input type="first_player" class="form-control" name="second_player" autofocus="on" value="{{ old('first_player') }}">
                             </div>
                         </div>
 
@@ -39,11 +39,29 @@
                                 <button type="submit" class="btn btn-primary">Опитай</button>
                             </div>
                         </div>
-                    </form>                    
+                    </form>
+                    <div>
+                        <table>
+                            <thead>
+                                <th>Вашето предположение</th>
+                                <th>Бикове</th>
+                                <th>Крави</th>
+                            </thead>
+                            <tbody>
+                                @foreach($game->guessNumber as $guess)
+                                <tr>
+                                    <td>{{$guess->guess_number}}</td>
+                                    <td>{{$guess->bulls}}</td>
+                                    <td>{{$guess->cows}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
 
 @stop

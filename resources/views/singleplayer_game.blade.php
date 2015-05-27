@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Вашето предположение:</label>
                             <div class="col-md-6">
-                                <input type="first_player" class="form-control" name="first_player" value="{{ old('first_player') }}">
+                                <input type="first_player" class="form-control" name="first_player" autofocus="on" value="{{ old('first_player') }}">
                             </div>
                         </div>
 
@@ -44,13 +44,15 @@
                         <table>
                             <thead>
                                 <th>Вашето предположение</th>
-                                <th>Бикове и крави</th>
+                                <th>Бикове</th>
+                                <th>Крави</th>
                             </thead>
                             <tbody>
-                                @foreach($game->guessNumber as $key => $value)
+                                @foreach($game->guessNumber as $guess)
                                 <tr>
-                                    <td>{{$value->guess_number}}</td>
-                                    <td>Бикове: {{$value->bulls}} Крави: {{$value->cows}}</td>
+                                    <td>{{$guess->guess_number}}</td>
+                                    <td>{{$guess->bulls}}</td>
+                                    <td>{{$guess->cows}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -17,8 +17,7 @@ class GameController extends Controller {
          */
         public function newSingleplayer() {
             // create array 1 to 9
-            $range_array = range(1, 9);
-           
+            $range_array = range(1, 9);           
             // flip array
             $array_flip = array_flip($range_array);
 
@@ -27,13 +26,34 @@ class GameController extends Controller {
             
             //save secret number in 
             $game = New Game;
-            $game->secret_number = $secret_number;
-            $game->save();
-            $game_id = $game->id;
+            $game->createGame($secret_number);
             
-            return view('singleplayer')->with('game_id', $game_id);
+            return view('singleplayer')->with('game_id', $game->game_id);
         }
-
+        
+        public function newMultiplayer(){
+            $secret_number = Input::get('first_player'); 
+            $game = New Game;
+            $game->saveGame($secret_number);
+            return view('multiplayer')->with('game_id', $game->game_id);
+        }
+        
+        public function multiplayerPost() {
+            $game_id = Input::get('game_id');
+            $guess_number = Input::get('second_player'); 
+            
+            $guess = New GuessNumber;  
+            
+            $guess->checkGuess($game_id, $guess_number);
+            
+            $guess->saveGuess($game_id, $guess_number, $guess->bull, $guess->cow);    
+            
+            if($guess->bull == 4){
+                return view('win_game')->with('game', $guess->game);
+            } else{
+                return view('singleplayer_game')->with('game', $guess->game);
+            }
+        }
         /**
 	 * Display a listing of the resource.
 	 *
@@ -53,33 +73,20 @@ class GameController extends Controller {
 	{            
             $game_id = Input::get('game_id');
             $guess_number = Input::get('first_player'); 
-            $game = Game::find($game_id); 
-            $secret_number = $game->secret_number;
-            
-            $array_number = array_map('intval', str_split($secret_number));
-            $array_guess  = str_split($guess_number);
-            $bull = 0;
-            $cow = 0;
-            
-            
-            foreach($array_number as $key_number => $value_number){                
-                foreach ($array_guess as $key_guess => $value_guess){                    
-                    if(($value_guess == $value_number) && ($key_guess == $key_number)){
-                        $bull++;                        
-                    } else if(($value_guess == $value_number) && ($key_guess != $key_number)){
-                        $cow++;                       
-                    }
-                }
-            }
-                        
+
             $guess = New GuessNumber;  
-            $guess->saveGuess($game_id, $guess_number, $bull, $cow);      
-            if($bull == 4){
-                return view('win_game')->with('game', $game);
+            
+            $guess->checkGuess($game_id, $guess_number);
+           
+            $guess->saveGuess($game_id, $guess_number, $guess->bull, $guess->cow);                
+            
+            if($guess->bull == 4){
+                return view('win_game')->with('game', $guess->game);
             } else{
-                return view('singleplayer_game')->with('game', $game);
+                return view('singleplayer_game')->with('game', $guess->game);
             }
 	}
 	
+        
 
 }

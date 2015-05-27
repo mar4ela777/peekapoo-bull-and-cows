@@ -19,10 +19,11 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-Route::get('/multiplayer', 'GameController@multiplayerIndex');
+
+Route::get('/multiplayer-create', 'GameController@multiplayerIndex');
+Route::post('/multiplayer-create', 'GameController@newMultiplayer');
 Route::post('/multiplayer', 'GameController@multiplayerPost');
 
 Route::get('/singleplayer', 'GameController@newSingleplayer');
 Route::post('/singleplayer', 'GameController@singleplayerPost');
 
-//Route::get('/win', 'GameController@newSingleplayer');
