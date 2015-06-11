@@ -14,27 +14,11 @@ use \Validator, \Redirect;
 use \Illuminate\Http\RedirectResponse;
 use \Illuminate\Support\Facades\Session;
 
-class GameController extends Controller {
-    
-    
+class MultiplayerController extends Controller {
+	   
         /*
-         * Create new singleplayer game
-         */
-        public function newSingleplayer() {
-            // create array 1 to 9
-            $range_array = range(1, 9);           
-            // flip array
-            $array_flip = array_flip($range_array);
-
-            // create our secret number
-            $secret_number = implode(array_rand($array_flip, 4));
-            
-            //save secret number in 
-            $game = New Game;
-            $game->saveGame($secret_number);
-            
-            return view('singleplayer')->with('game_id', $game->game_id);
-        }
+         * Create new multiplayer game
+         */        
         
         public function newMultiplayer(){
             $secret_number = Input::get('player'); 
@@ -48,7 +32,7 @@ class GameController extends Controller {
             else{
                 $game = New Game;
                 $game->saveGame($secret_number);
-                return view('player')->with('game_id', $game->game_id);
+                return view('multiplayer_game')->with('game_id', $game->game_id);
             }
         }
         
@@ -62,25 +46,16 @@ class GameController extends Controller {
             return view('multiplayer');
 	}
         
-        public function singleplayerIndex()
-	{
-            return view('singleplayer');
-	}
-        
-        public function playerIndex(){
-            return view('singleplayer');
-        }
-
-        public function singleplayerPost()
+        public function secondplayerPost()
 	{          
-//            $game = Input::all();
+            
             $game_id = Input::get('game_id');
             $guess_number = Input::get('player'); 
             
             $validator = Validator::make(Input::all(), Game::$rules, Game::$errors_message);
             
             if ($validator->fails()){                
-                return Redirect::to('singleplayer-mistake')->withErrors($validator)->withInput();
+                return Redirect::to('multyplayer-mistake')->withErrors($validator)->withInput();
             } else{
                 $guess = New GuessNumber;  
             
@@ -98,7 +73,5 @@ class GameController extends Controller {
             
             
 	}
-	
-        
 
 }

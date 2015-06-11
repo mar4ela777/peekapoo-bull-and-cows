@@ -14,8 +14,7 @@ use \Validator, \Redirect;
 use \Illuminate\Http\RedirectResponse;
 use \Illuminate\Support\Facades\Session;
 
-class GameController extends Controller {
-    
+class SingleplayerController extends Controller {
     
         /*
          * Create new singleplayer game
@@ -35,45 +34,16 @@ class GameController extends Controller {
             
             return view('singleplayer')->with('game_id', $game->game_id);
         }
-        
-        public function newMultiplayer(){
-            $secret_number = Input::get('player'); 
-            
-            $validator = Validator::make(Input::all(), Game::$rules, Game::$errors_message);
-            
-            if ($validator->fails())
-            {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-            else{
-                $game = New Game;
-                $game->saveGame($secret_number);
-                return view('player')->with('game_id', $game->game_id);
-            }
-        }
-        
-        /**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function multiplayerIndex()
-	{
-            return view('multiplayer');
-	}
+                        
         
         public function singleplayerIndex()
 	{
             return view('singleplayer');
 	}
-        
-        public function playerIndex(){
-            return view('singleplayer');
-        }
-
+      
         public function singleplayerPost()
 	{          
-//            $game = Input::all();
+            
             $game_id = Input::get('game_id');
             $guess_number = Input::get('player'); 
             
@@ -91,14 +61,10 @@ class GameController extends Controller {
                 if($guess->bull == 4){
                     return view('win_game')->with('game', $guess->game);
                 } else{
-                    return view('game')->with('game', $guess->game);
+                    return view('singleplayer_game')->with('game', $guess->game);
                 }
             }
-            
-            
-            
-	}
-	
-        
 
+	}
+	       
 }

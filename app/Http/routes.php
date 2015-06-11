@@ -15,15 +15,19 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('/singleplayer', 'SingleplayerController@newSingleplayer');
+Route::get('/singleplayer-mistake', function(){
+    return View::make('singleplayer_mistake');
+});
+Route::post('/singleplayer', 'SingleplayerController@singleplayerPost');
 
-Route::get('/multiplayer-create', 'GameController@multiplayerIndex');
-Route::post('/multiplayer-create', 'GameController@newMultiplayer');
-Route::post('/multiplayer', 'GameController@multiplayerPost');
+Route::get('/multiplayer', 'MultiplayerController@multiplayerIndex');
+Route::post('/multiplayer', 'MultiplayerController@newMultiplayer');
+//Route::post('/multiplayer', 'GameController@playerPost');
+Route::get('/multiplayer-second-player', 'GameController@secondPlayerIndex');
+Route::post('/multiplayer-second-player', 'MultiplayerController@secondPlayerPost');
 
-Route::get('/singleplayer', 'GameController@newSingleplayer');
-Route::post('/singleplayer', 'GameController@singleplayerPost');
+
+
+
 

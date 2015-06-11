@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    <title>Multiplayer - Първи Играч</title>
+    <title>Multi Player Error</title>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Първи играч</div>
+                <div class="panel-heading">Втори Играч </div>
                 <div class="panel-body">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -23,30 +23,23 @@
                             </ul>
                         </div>
                     @endif
-
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/multiplayer') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="game_id" value="{{ old('game_id') }}">
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Моля, въведете Вашето число: </label>
+                            <label class="col-md-4 control-label">Вашето предположение:</label>
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="player" autofocus="on" value="{{ old('player') }}">
+                                <input type="text" class="form-control" name="player" autofocus="on" value="{{ old('player') }}">
                             </div>
                         </div>
-<!--                        <div class="form-group">
-                            <label class="col-md-4 control-label">Моля, изберете сложност на играта: </label>
-                            <div class="col-md-6">
-                                <input type="radio" name="count" value="4" checked/><span>4</span>
-                                <input type="radio" name="count" value="5"/><span>5</span>
-                                <input type="radio" name="count" value="6"/><span>6</span>
-                            </div>
-                        </div>-->
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">Старт на играта</button>
+                                <button type="submit" class="btn btn-primary">Опитай Пак</button>
                             </div>
                         </div>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </div>

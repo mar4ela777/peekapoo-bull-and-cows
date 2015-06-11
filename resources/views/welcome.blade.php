@@ -1,11 +1,16 @@
 @extends('app')
 
+@section('head')
+    @parent
+    <title>Peecapoo Game Bulls and Cows</title>
+@stop
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">This is the Peecapoo Game Bull and Cows</div>
+                <div class="panel-heading">Добре дошли в Peecapoo Game Bulls and Cows</div>
 
                 <div class="panel-body image-backgraund">
                     <div>
