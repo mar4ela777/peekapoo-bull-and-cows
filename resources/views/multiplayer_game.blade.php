@@ -13,7 +13,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Втори Играч </div>
                 <div class="panel-body">                    
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/multiplayer') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/multiplayer-game') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="game_id" value="{{ $game_id }}">
                         <div class="form-group">
@@ -29,6 +29,24 @@
                             </div>
                         </div>
                     </form>
+                    <div>
+                        <table>
+                            <thead>
+                                <th>Вашето предположение</th>
+                                <th>Бикове</th>
+                                <th>Крави</th>
+                            </thead>
+                            <tbody>
+                                @foreach($game->guessNumber as $guess)
+                                <tr>
+                                    <td>{{$guess->guess_number}}</td>
+                                    <td>{{$guess->bulls}}</td>
+                                    <td>{{$guess->cows}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

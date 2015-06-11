@@ -33,14 +33,6 @@
                                 <input type="password" class="form-control" name="player" autofocus="on" value="{{ old('player') }}">
                             </div>
                         </div>
-<!--                        <div class="form-group">
-                            <label class="col-md-4 control-label">Моля, изберете сложност на играта: </label>
-                            <div class="col-md-6">
-                                <input type="radio" name="count" value="4" checked/><span>4</span>
-                                <input type="radio" name="count" value="5"/><span>5</span>
-                                <input type="radio" name="count" value="6"/><span>6</span>
-                            </div>
-                        </div>-->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Старт на играта</button>

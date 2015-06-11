@@ -32,7 +32,7 @@ class MultiplayerController extends Controller {
             else{
                 $game = New Game;
                 $game->saveGame($secret_number);
-                return view('multiplayer_game')->with('game_id', $game->game_id);
+                return view('multiplayer_start')->with('game_id', $game->game_id);
             }
         }
         
@@ -46,7 +46,7 @@ class MultiplayerController extends Controller {
             return view('multiplayer');
 	}
         
-        public function secondplayerPost()
+        public function playerPost()
 	{          
             
             $game_id = Input::get('game_id');
@@ -55,7 +55,7 @@ class MultiplayerController extends Controller {
             $validator = Validator::make(Input::all(), Game::$rules, Game::$errors_message);
             
             if ($validator->fails()){                
-                return Redirect::to('multyplayer-mistake')->withErrors($validator)->withInput();
+                return Redirect::to('multiplayer-mistake')->withErrors($validator)->withInput();
             } else{
                 $guess = New GuessNumber;  
             
@@ -66,7 +66,7 @@ class MultiplayerController extends Controller {
                 if($guess->bull == 4){
                     return view('win_game')->with('game', $guess->game);
                 } else{
-                    return view('game')->with('game', $guess->game);
+                    return view('multiplayer_game')->with('game', $guess->game)->with('game_id', $game_id);
                 }
             }
             

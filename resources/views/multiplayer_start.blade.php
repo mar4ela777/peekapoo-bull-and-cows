@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    <title>Multi Player Error</title>
+    <title>Second Player </title>
 @stop
 
 @section('content')
@@ -13,19 +13,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Втори Играч </div>
                 <div class="panel-body">
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> Грешка във въведените данни!<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/multiplayer-game') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="game_id" value="{{ old('game_id') }}">
+                        <input type="hidden" name="game_id" value="{{ $game_id }}">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Вашето предположение:</label>
@@ -36,7 +26,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">Опитай Пак</button>
+                                <button type="submit" class="btn btn-primary">Опитай</button>
                             </div>
                         </div>
                     </form>                    

@@ -24,10 +24,12 @@ Route::post('/singleplayer', 'SingleplayerController@singleplayerPost');
 Route::get('/multiplayer', 'MultiplayerController@multiplayerIndex');
 Route::post('/multiplayer', 'MultiplayerController@newMultiplayer');
 //Route::post('/multiplayer', 'GameController@playerPost');
-Route::get('/multiplayer-second-player', 'GameController@secondPlayerIndex');
-Route::post('/multiplayer-second-player', 'MultiplayerController@secondPlayerPost');
+Route::get('/multiplayer-game', 'MultiplayerController@playerIndex');
+Route::post('/multiplayer-game', 'MultiplayerController@playerPost');
 
-
+Route::get('/multiplayer-mistake', function(){
+    return View::make('multiplayer_mistake');
+});
 
 
 
