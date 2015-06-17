@@ -73,7 +73,6 @@ class GameController extends Controller {
 
         public function singleplayerPost()
 	{          
-//            $game = Input::all();
             $game_id = Input::get('game_id');
             $guess_number = Input::get('player'); 
             
